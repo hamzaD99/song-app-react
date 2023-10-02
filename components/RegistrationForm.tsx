@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const router = useRouter();
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dataError, setDataError] = useState('');
 
-  const handleEmailChange = (e:any) => {
-    setEmail(e.target.value);
+  const handleUserNameChange = (e:any) => {
+    setUserName(e.target.value);
   };
 
   const handlePasswordChange = (e:any) => {
@@ -27,11 +27,11 @@ const LoginForm = () => {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     setDataError('')
-    if(name && email && password && confirmPassword){
+    if(name && userName && password && confirmPassword){
       if(password == confirmPassword){
         axios.post('/user/signup',{
           name: name,
-          email: email,
+          userName: userName,
           password: password
         }).then((res)=>{
           console.log(res)
@@ -70,8 +70,8 @@ const LoginForm = () => {
                   <input type="text" className="form-control" id="name" style={{ backgroundColor: '#F6F4EB', color: '#4682A9', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem', margin: '0.5rem 0rem 1.5rem 0rem' }} placeholder="Enter your name" onChange={handleNameChange} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email" style={{ fontFamily: 'Arial, sans-serif', fontSize: '1.2rem' }}>Email</label>
-                  <input type="text" className="form-control" id="email" style={{ backgroundColor: '#F6F4EB', color: '#4682A9', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem', margin: '0.5rem 0rem 1.5rem 0rem' }} placeholder="Enter your email" onChange={handleEmailChange} />
+                  <label htmlFor="userName" style={{ fontFamily: 'Arial, sans-serif', fontSize: '1.2rem' }}>User Name</label>
+                  <input type="text" className="form-control" id="userName" style={{ backgroundColor: '#F6F4EB', color: '#4682A9', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem', margin: '0.5rem 0rem 1.5rem 0rem' }} placeholder="Enter your User Name" onChange={handleUserNameChange} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password" style={{ fontFamily: 'Arial, sans-serif', fontSize: '1.2rem' }}>Password</label>
@@ -83,6 +83,7 @@ const LoginForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#749BC2', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem', marginTop: '1rem', margin: '15px 0px' }} onClick={handleSubmit}>Register</button>
               </form>
+              <a href='/login'>Already have an account?</a>
             </div>
           </div>
         </div>

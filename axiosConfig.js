@@ -4,6 +4,7 @@ const instance = axios.create({
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
+    'authorization': typeof window !== 'undefined' ? (localStorage.getItem('authToken') ? 'Bearer ' + localStorage.getItem('authToken') : null) : null
   },
 });
 export default instance;

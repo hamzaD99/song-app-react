@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link'
 import axios from '../axiosConfig';
 import { useRouter } from 'next/router';
 
@@ -83,7 +84,7 @@ const LoginForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#749BC2', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem', marginTop: '1rem', margin: '15px 0px' }} onClick={handleSubmit}>Register</button>
               </form>
-              <a href='/login'>Already have an account?</a>
+              <Link href='/login'>Already have an account?</Link>
             </div>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import Link from 'next/link'
 import React, { use } from 'react';
 import { useRouter } from 'next/router';
 import { ImBin } from 'react-icons/im'
 import axios from '../axiosConfig';
 
-const SongsTable = ({ songsData, user, pageNumber, pagesCount }) => {
+const SongsTable = ({ songsData, user, pageNumber, pagesCount }:{songsData:any,user:any,pageNumber:any,pagesCount:any}) => {
   const router = useRouter();
   const [search, setSearch] = useState('');
 
@@ -61,17 +62,17 @@ const SongsTable = ({ songsData, user, pageNumber, pagesCount }) => {
             padding: 0
           }}>
             <div style={{ marginRight: '15px' }}>
-              <a href={`/songs?page=${pageNumber - 1}`} style={pageNumber == 1 ? { pointerEvents: 'none', color: 'gray', marginRight: '8px' } : { marginRight: '8px' }}>Prev</a>
+              <Link href={`/songs?page=${pageNumber - 1}`} style={pageNumber == 1 ? { pointerEvents: 'none', color: 'gray', marginRight: '8px' } : { marginRight: '8px' }}>Prev</Link>
               {pageNumber} Out Of {pagesCount}
-              <a href={`/songs?page=${pageNumber + 1}`} style={pageNumber == pagesCount ? { pointerEvents: 'none', color: 'gray', marginLeft: '8px' } : { marginLeft: '8px' }}>Next</a>
+              <Link href={`/songs?page=${pageNumber + 1}`} style={pageNumber == pagesCount ? { pointerEvents: 'none', color: 'gray', marginLeft: '8px' } : { marginLeft: '8px' }}>Next</Link>
             </div>
-            {user && (user.roleId == 2 || user.roleId == 3) && <a href="/add_song"><button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3874cc', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem', marginRight: '0.5rem' }}>Add Songs</button></a>}
+            {user && (user.roleId == 2 || user.roleId == 3) && <Link href="/add_song"><button type="submit" className="btn btn-primary" style={{ backgroundColor: '#3874cc', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem', marginRight: '0.5rem' }}>Add Songs</button></Link>}
             <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#dc3545', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem' }} onClick={signOut}>Logout</button>
           </div>
         </div>
       </div>
       {songsData
-        ? songsData.map((song, index) => (
+        ? songsData.map((song:any, index:any) => (
           <div key={index} className="my-3 card">
             <div className="card-body">
               <div className="row justify-content-between">

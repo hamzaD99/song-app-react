@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from '../axiosConfig';
 import { useRouter } from 'next/router';
+import Link from 'next/link'
 
 const AddSongForm = () => {
   const router = useRouter();
@@ -84,7 +85,7 @@ const AddSongForm = () => {
                 </div>
                 <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#749BC2', border: 'none', fontFamily: 'Arial, sans-serif', fontSize: '1rem', padding: '0.5rem 1rem', marginTop: '1rem', margin: '15px 0px' }} onClick={handleSubmit}>Add</button>
               </form>
-              <a href='/songs'>Back To Songs</a>
+              <Link href='/songs'>Back To Songs</Link>
             </div>
           </div>
         </div>

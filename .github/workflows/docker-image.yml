@@ -23,6 +23,12 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker push hamzadaoud99/song-app:frontend
 
-    - name: SSH into the server and update the Docker container
+    - name: install ssh keys
       run: |
-        sshpass -p c0erwO9EJQlFmuz ssh root@147.182.220.86 'docker pull hamzadaoud99/song-app:frontend && docker stop root-frontend-1 && docker rm root-frontend-1 && docker run -d -p 3000:3000 --name root-frontend-1 hamzadaoud99/song-app:frontend'
+        install -m 600 -D /dev/null ~/.ssh/id_rsa
+        echo "${{ secrets.SERVER_PASSWORD }}" > ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_IP }} > ~/.ssh/known_hosts
+    - name: connect and pull
+      run: ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "docker pull hamzadaoud99/song-app:frontend && docker stop root-frontend-1 && docker rm root-frontend-1 && docker run -d -p 3000:3000 --name root-frontend-1 hamzadaoud99/song-app:frontend && exit"
+    - name: cleanup
+      run: rm -rf ~/.ssh

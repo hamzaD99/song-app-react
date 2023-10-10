@@ -13,7 +13,6 @@ const LoginPage = () => {
   })
   return (
     <div>
-      TEST GIT
       <LoginForm />
     </div>
   );

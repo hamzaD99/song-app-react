@@ -26,4 +26,4 @@ jobs:
     - name: SSH into the server and update the Docker container
       run: |
         sudo apt-get -y install sshpass
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'docker pull hamzadaoud99/song-app:frontend && docker-compose down && docker-compose up -d'
+        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'docker pull hamzadaoud99/song-app:frontend && docker-compose down && docker rm root-frontend-1 && docker run -d -p 3000:3000 --name root-frontend-1 hamzadaoud99/song-app:frontend'

@@ -25,4 +25,4 @@ jobs:
 
     - name: SSH into the server and update the Docker container
       run: |
-        sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'docker pull hamzadaoud99/song-app:frontend && docker stop root-frontend-1 && docker rm root-frontend-1 && docker run -d -p 3000:3000 --name root-frontend-1 hamzadaoud99/song-app:frontend'
+        sshpass -p c0erwO9EJQlFmuz ssh root@147.182.220.86 'docker pull hamzadaoud99/song-app:frontend && docker stop root-frontend-1 && docker rm root-frontend-1 && docker run -d -p 3000:3000 --name root-frontend-1 hamzadaoud99/song-app:frontend'

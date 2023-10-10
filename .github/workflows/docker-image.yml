@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI/CD
 
 on:
   push:
@@ -8,11 +8,22 @@ on:
 
 jobs:
 
-  build:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Push Docker image to a container registry (e.g., Docker Hub)
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push my-image-name:$(date +%s)
+
+        - name: SSH into the server and update the Docker container
+        run: |
+          sudo apt-get -y install sshpass
+          sshpass -p ${{ secrets.SERVER_PASSWORD }} ssh ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'docker pull my-image-name:$(date +%s) && docker stop root-frontend-1 && docker rm root-frontend-1 && docker run -d --name root-frontend-1 my-image-name:$(date +%s)'
